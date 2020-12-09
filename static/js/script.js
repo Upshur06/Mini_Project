@@ -32,16 +32,12 @@ let generate = function(){
      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXzWdEsjiAWZhHndrmiTK_rxhYMzTghw9EZA&usqp=CAU", 
      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAzGkPogEiVLbsuUmQdeFgKnpcFbbk-nEkzA&usqp=CAU"];
 
-     for(let i=0;i<=wildcatS.length-1;i++){
-        let catImage = document.createElement('IMG');
-        catImage.setAttribute("src",wildcatS[i]);
+
+    //  for(let i=0;i<=wildcatS.length-1;i++){
+        let catImage = document.createElement('img');
+        catImage.setAttribute("src",wildcatS[3]);
         catImage.setAttribute('class', 'wildcats');
         catsContainer.appendChild(catImage);
-        }
+        // }
 }
 
-//     let catImage = document.createElement('IMG');
-//     catImage.setAttribute("src", );
-//     catImage.setAttribute('class', 'wildcats');
-//     catsContainer.appendChild(catImage);
-// }
