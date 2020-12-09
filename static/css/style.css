@@ -19,6 +19,7 @@
 .flex-box-container-2 img {
   border: 2px solid;
   margin: 10px;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.7);
 }
 
 .contain-1 div,

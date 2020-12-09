@@ -35,7 +35,7 @@ let generate = function(){
 
     //  for(let i=0;i<=wildcatS.length-1;i++){
         let catImage = document.createElement('img');
-        catImage.setAttribute("src",wildcatS[3]);
+        catImage.setAttribute("src",wildcatS[1]);
         catImage.setAttribute('class', 'wildcats');
         catsContainer.appendChild(catImage);
         // }
