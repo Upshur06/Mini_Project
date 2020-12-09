@@ -1,8 +1,11 @@
 // Challenge 1: Your Age in Days
 
 let flexBoxResult = document.getElementById('flex-box-result');
+let catsContainer = document.getElementById('catsContainer');
 
-function ageInDays(){
+
+
+let ageInDays = function(){
 
     let birthYear = prompt('Please Enter the year you were born');
     let currentYear = prompt('Please Enter the current year');
@@ -13,9 +16,32 @@ function ageInDays(){
     h1.setAttribute('id', 'ageInDays');
     h1.appendChild(textAnswer);
     flexBoxResult.appendChild(h1);
-
 }
 
-function reset(){
+let reset = function(){
     flexBoxResult.remove();
 }
+
+// Challenge 2: Cat Generator
+
+let generate = function(){
+    let wildcatS = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnsFWhP6teYmjKCD6CXtGGOAFvKE0__RT3Sg&usqp=CAU", 
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ2LqumZ9p8tEheYOgMM2DpidU7mz0QE14gg&usqp=CAU",
+     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZeRjWNZXYcU4plyD8Vh_d-N2SEsRShLfeQ&usqp=CAU&reload=on",
+     "https://i.pinimg.com/originals/3b/fe/1c/3bfe1c2b9962af417c5fd208d5e343f5.jpg",
+     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXzWdEsjiAWZhHndrmiTK_rxhYMzTghw9EZA&usqp=CAU", 
+     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAzGkPogEiVLbsuUmQdeFgKnpcFbbk-nEkzA&usqp=CAU"];
+
+     for(let i=0;i<=wildcatS.length-1;i++){
+        let catImage = document.createElement('IMG');
+        catImage.setAttribute("src",wildcatS[i]);
+        catImage.setAttribute('class', 'wildcats');
+        catsContainer.appendChild(catImage);
+        }
+}
+
+//     let catImage = document.createElement('IMG');
+//     catImage.setAttribute("src", );
+//     catImage.setAttribute('class', 'wildcats');
+//     catsContainer.appendChild(catImage);
+// }
