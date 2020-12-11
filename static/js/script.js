@@ -44,11 +44,19 @@ let generate = function(){
 let rpsGame = function(yourChoice){
     let huamnChoice, botChoice;
     // huamnChoice = yourChoice.id;
-    // botChoice = ;
+    botChoice = numberToChoice(randToRpsInt());
+    console.log(botChoice);
     // result = decideWinner(huamnChoice, botChoice);
     // message = finalMessage(result);
-    rpsFrontEnd(yourChoice, botChoice, message);
+    // rpsFrontEnd(yourChoice, botChoice, message);
 }
 
+let randToRpsInt = function(){
+    return Math.floor(Math.random() *3 );
+}
+
+let numberToChoice = function(number){
+    return ["rock", "paper", "scissors"][number];
+}
 
 // let result = decideWinner(huamnChoice, botChoice);
