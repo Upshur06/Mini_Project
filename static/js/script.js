@@ -41,3 +41,14 @@ let generate = function(){
         // }
 }
 
+let rpsGame = function(yourChoice){
+    let huamnChoice, botChoice;
+    // huamnChoice = yourChoice.id;
+    // botChoice = ;
+    // result = decideWinner(huamnChoice, botChoice);
+    // message = finalMessage(result);
+    rpsFrontEnd(yourChoice, botChoice, message);
+}
+
+
+// let result = decideWinner(huamnChoice, botChoice);
