@@ -43,10 +43,11 @@ let generate = function(){
 
 let rpsGame = function(yourChoice){
     let huamnChoice, botChoice;
-    // huamnChoice = yourChoice.id;
+    huamnChoice = yourChoice.id;
     botChoice = numberToChoice(randToRpsInt());
-    console.log(botChoice);
-    // result = decideWinner(huamnChoice, botChoice);
+    console.log('Computer choice:', botChoice);
+    result = decideWinner(huamnChoice, botChoice);
+    console.log(result);
     // message = finalMessage(result);
     // rpsFrontEnd(yourChoice, botChoice, message);
 }
@@ -59,4 +60,15 @@ let numberToChoice = function(number){
     return ["rock", "paper", "scissors"][number];
 }
 
-// let result = decideWinner(huamnChoice, botChoice);
+let decideWinner = function(yourChoice, computerChoice){
+    let rpsDataBase = {
+        "rock": {"scissors" : 1, "rock" : 0.5, "paper" : 0},
+        "paper": {"rock" : 1, "paper" : 0.5, "scissors" : 0},
+        "scissors": {"paper" : 1, "scissors" : 0.5, "rock" : 0}
+    };
+
+    let yourScore = rpsDataBase[yourChoice][computerChoice];
+    let computerScore = rpsDataBase[computerChoice][yourChoice];
+
+    return [yourScore, computerScore];
+}
