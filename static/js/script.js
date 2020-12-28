@@ -41,18 +41,21 @@ let generate = function(){
         // }
 }
 
+
+// Challenge 3: Rock, Paper, Scissors
+
 let rpsGame = function(yourChoice){
-    let huamnChoice, botChoice;
-    huamnChoice = yourChoice.id;
+    let humanChoice, botChoice;
+    humanChoice = yourChoice.id;
     botChoice = numberToChoice(randToRpsInt());
     console.log('Computer choice:', botChoice);
 
-    result = decideWinner(huamnChoice, botChoice);
+    result = decideWinner(humanChoice, botChoice);
     console.log(result);
     
     message = finalMessage(result);
     console.log(message);
-    // rpsFrontEnd(yourChoice, botChoice, message);
+    rpsFrontEnd(yourChoice.id, botChoice, message);
 }
 
 let randToRpsInt = function(){
@@ -78,6 +81,31 @@ let decideWinner = function(yourChoice, computerChoice){
 
 let finalMessage = function([yourScore, computerScore]) {
 
-    return (yourScore === 0) ? {'message': 'You Lost!', 'color': 'red'} : (yourScore === 0.5) ? {'message': 'You Tied!', 'color': 'yellow'} : {'message': 'You Won!', 'color': 'green'} ;
-    
+    return (yourScore === 0) ? {'message': 'You Lost!', 'color': 'red'} : (yourScore === 0.5) ? {'message': 'You Tied!', 'color': 'yellow'} : {'message': 'You Won!', 'color': 'green'}    
+}
+
+let rpsFrontEnd = function(humanImageChoice, botImageChoice, finalMessage){
+    let imagesDatabase = {
+        'rock' : document.getElementById('rock').src, 
+        'paper' : document.getElementById('paper').src, 
+        'scissors' : document.getElementById('scissors').src, 
+    }
+
+    document.getElementById('rock').remove(); 
+    document.getElementById('paper').remove(); 
+    document.getElementById('scissors').remove();
+
+    let humanDiv = document.createElement('div');
+    let botDiv = document.createElement('div');
+    let messageDiv = document.createElement('div');
+
+    humanDiv.innerHTML = "<img src='" + imagesDatabase[humanImageChoice] + "' height=150 width=150 style='box-shadow: 0px 10px 50px rgba(37,50,233,1);'>"
+    messageDiv.innerHTML = "<h1 style='color: " + finalMessage['color'] + "; font-size: 60px; padding: 30px; '>" + finalMessage['message'] + "</h1>"
+    botDiv.innerHTML = "<img src='" + imagesDatabase[botImageChoice] + "' height=150 width=150 style='box-shadow: 0px 10px 50px rgba(243, 38, 24, 1);'>"
+   
+
+    document.getElementById('flex-box-rps-div').appendChild(humanDiv);
+    document.getElementById('flex-box-rps-div').appendChild(messageDiv);
+    document.getElementById('flex-box-rps-div').appendChild(botDiv);
+   
 }
