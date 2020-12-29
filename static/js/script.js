@@ -1,12 +1,8 @@
 // Challenge 1: Your Age in Days
-
 let flexBoxResult = document.getElementById('flex-box-result');
 let catsContainer = document.getElementById('catsContainer');
 
-
-
 let ageInDays = function(){
-
     let birthYear = prompt('Please Enter the year you were born');
     let currentYear = prompt('Please Enter the current year');
     let days = 365;
@@ -23,7 +19,6 @@ let reset = function(){
 }
 
 // Challenge 2: Cat Generator
-
 let generate = function(){
     let wildcatS = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnsFWhP6teYmjKCD6CXtGGOAFvKE0__RT3Sg&usqp=CAU", 
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ2LqumZ9p8tEheYOgMM2DpidU7mz0QE14gg&usqp=CAU",
@@ -31,7 +26,6 @@ let generate = function(){
      "https://i.pinimg.com/originals/3b/fe/1c/3bfe1c2b9962af417c5fd208d5e343f5.jpg",
      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXzWdEsjiAWZhHndrmiTK_rxhYMzTghw9EZA&usqp=CAU", 
      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAzGkPogEiVLbsuUmQdeFgKnpcFbbk-nEkzA&usqp=CAU"];
-
 
     //  for(let i=0;i<=wildcatS.length-1;i++){
         let catImage = document.createElement('img');
@@ -43,7 +37,6 @@ let generate = function(){
 
 
 // Challenge 3: Rock, Paper, Scissors
-
 let rpsGame = function(yourChoice){
     let humanChoice, botChoice;
     humanChoice = yourChoice.id;
@@ -103,9 +96,19 @@ let rpsFrontEnd = function(humanImageChoice, botImageChoice, finalMessage){
     messageDiv.innerHTML = "<h1 style='color: " + finalMessage['color'] + "; font-size: 60px; padding: 30px; '>" + finalMessage['message'] + "</h1>"
     botDiv.innerHTML = "<img src='" + imagesDatabase[botImageChoice] + "' height=150 width=150 style='box-shadow: 0px 10px 50px rgba(243, 38, 24, 1);'>"
    
-
     document.getElementById('flex-box-rps-div').appendChild(humanDiv);
     document.getElementById('flex-box-rps-div').appendChild(messageDiv);
-    document.getElementById('flex-box-rps-div').appendChild(botDiv);
-   
+    document.getElementById('flex-box-rps-div').appendChild(botDiv);  
+}
+
+// Challenge 4: Change the Color of All Buttons
+let all_buttons = document.getElementsByTagName('button');
+
+let copyAllButtons = [];
+for(let i=0; i<=all_buttons.length; i++){
+    copyAllButtons.push(all_buttons[i])
+}
+
+let buttonColorChange = function(buttonThingy){
+    
 }
