@@ -46,9 +46,25 @@
             <img id="rock" src="https://www.campcanary.co.uk/uploads/rock-icon-grey.png" height=150 width=150 onclick="rpsGame(this)">
             <img id="paper" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6bBa8AfztyaT0Yuh8H1BigDCeSzCvb-E2AQ&usqp=CAU" height=150 width=150 onclick="rpsGame(this)">
             <img id="scissors" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrqwAbnez9h4SX6iLVmjC3mFlkQuULeN3C7Q&usqp=CAU" height=150 width=150 onclick="rpsGame(this)">
-
         </div>
+    </div>
 
+    <div class="container-4">
+        <h2 id="change-my-color">Challenge 4: Change the Color of All Buttons</h2>
+        <div class="flex-box-pick-color">
+            <form action=""> 
+                <select name="backdrop" id="background" onchange="buttonColorChange(this)">
+                    <option value="random">Random</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="reset">Reset</option>
+                </select>
+            </form>
+                <button class="btn btn-primary">Facebook!</button>
+                <button class="btn btn-danger">Instagram!</button>
+                <button class="btn btn-warning">Slack!</button>
+                <button class="btn btn-success">Marco Polo!</button>
+        </div>
     </div>
 
     <script src="static/js/script.js"></script>
