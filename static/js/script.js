@@ -105,10 +105,38 @@ let rpsFrontEnd = function(humanImageChoice, botImageChoice, finalMessage){
 let all_buttons = document.getElementsByTagName('button');
 
 let copyAllButtons = [];
-for(let i=0; i<=all_buttons.length; i++){
-    copyAllButtons.push(all_buttons[i])
+for(let i = 0; i < all_buttons.length; i++){
+    copyAllButtons.push(all_buttons[i].classList[1]);
 }
 
 let buttonColorChange = function(buttonThingy){
-    
+    (buttonThingy.value === "red") ? buttonsRed() : (buttonThingy.value === "green") ? buttonsGreen() : (buttonThingy.value === "reset") ? buttonColorReset() : randomColors()
 }
+
+
+let buttonsRed = function(){
+    for(let i = 0; i < all_buttons.length; i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add('btn-danger');
+    }
+}
+
+
+let buttonsGreen = function(){
+    for(let i = 0; i < all_buttons.length; i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add('btn-success');
+    }
+}
+
+let buttonColorReset = function(){
+    for(let i = 0; i < all_buttons.length; i++){
+        all_buttons[i].classList.remove(all_buttons[i].classList[1]);
+        all_buttons[i].classList.add(copyAllButtons[i]);
+    }
+}
+
+let randomColors = function(){
+
+}
+
