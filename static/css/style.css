@@ -24,7 +24,8 @@
   justify-content: space-around;
 }
 
-.flex-blackjack-row-1, .flex-blackjack-row-2 {
+.flex-blackjack-row-1,
+.flex-blackjack-row-2 {
   background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVZcmxhHznIosHm28FGOzzhIi9wh3Tt8weSA&usqp=CAU");
   background-repeat: no-repeat;
   background-size: cover;
@@ -39,22 +40,24 @@
   text-align: center;
 }
 
-.flex-blackjack-row-1 img{
+.flex-blackjack-row-1 img {
   width: 25%;
   padding: 10px;
 }
 
-.flex-blackjack-row-2 button{
+.flex-blackjack-row-2 button {
   border: 1px solid black;
   padding: 10px;
 }
 
-.flex-blackjack-row-2 div{
+.flex-blackjack-row-2 div {
   border: 1px solid black;
   padding: 10px;
 }
 
-table, th, td{
+table,
+th,
+td {
   border: 1px solid black;
   padding: 5px;
 }
