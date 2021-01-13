@@ -19,20 +19,33 @@ let reset = function(){
 }
 
 // Challenge 2: Cat Generator
-let generate = function(){
-    let wildcatS = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnsFWhP6teYmjKCD6CXtGGOAFvKE0__RT3Sg&usqp=CAU", 
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ2LqumZ9p8tEheYOgMM2DpidU7mz0QE14gg&usqp=CAU",
-     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZeRjWNZXYcU4plyD8Vh_d-N2SEsRShLfeQ&usqp=CAU&reload=on",
-     "https://i.pinimg.com/originals/3b/fe/1c/3bfe1c2b9962af417c5fd208d5e343f5.jpg",
-     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXzWdEsjiAWZhHndrmiTK_rxhYMzTghw9EZA&usqp=CAU", 
-     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAzGkPogEiVLbsuUmQdeFgKnpcFbbk-nEkzA&usqp=CAU"];
+let wildcatS = {      
+    'cats': ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnsFWhP6teYmjKCD6CXtGGOAFvKE0__RT3Sg&usqp=CAU", 
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQ2LqumZ9p8tEheYOgMM2DpidU7mz0QE14gg&usqp=CAU",
+ "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbZeRjWNZXYcU4plyD8Vh_d-N2SEsRShLfeQ&usqp=CAU&reload=on",
+ "https://i.pinimg.com/originals/3b/fe/1c/3bfe1c2b9962af417c5fd208d5e343f5.jpg",
+ "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXzWdEsjiAWZhHndrmiTK_rxhYMzTghw9EZA&usqp=CAU", 
+ "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAzGkPogEiVLbsuUmQdeFgKnpcFbbk-nEkzA&usqp=CAU"],
+}
 
-    //  for(let i=0;i<=wildcatS.length-1;i++){
-        let catImage = document.createElement('img');
-        catImage.setAttribute("src",wildcatS[1]);
-        catImage.setAttribute('class', 'wildcats');
-        catsContainer.appendChild(catImage);
-        // }
+let generate = function(){
+    showWildCats();
+}
+
+function randomCatsSelector(){
+    let randomIndex = Math.floor(Math.random() * 6);
+    return wildcatS['cats'][randomIndex];
+}
+
+function characters(pic){
+    let pictureImage = document.createElement('img');
+    pictureImage.src = `${pic}`;
+    document.querySelector('.flex-box-container-2').appendChild(pictureImage);
+}
+
+function showWildCats() {
+    let pic = randomCatsSelector()
+    characters(pic);
 }
 
 
@@ -165,38 +178,31 @@ const hitSound = new Audio('static/sounds/swish.m4a');
 const winSound = new Audio('static/sounds/cash.mp3');
 const lostSound = new Audio('static/sounds/aww.mp3');
 
+let blackjackHit = function() {
+    if(blackjackGame['isStand'] === false){
+        let card = randomCard();
+        showCard(card, YOU);
+        updateScore(card, YOU);
+        showScore(YOU);
+    }
+}
+
 let randomCard = function(){
     let randomIndex = Math.floor(Math.random() * 13);
     return blackjackGame['cards'][randomIndex];
 }
 
-let dealerLogic = function(){
-    blackjackGame['isStand'] = true;
-    let card = randomCard();
-    // console.log(card);
-    showCard(card, DEALER);
-    updateScore(card, DEALER);
-    showScore(DEALER);
-    // console.log(DEALER['score']);
-
-    if(DEALER['score'] > 15){
-        blackjackGame['turnsOver'] = true;
-        showResult(computeWinner());
-        console.log(blackjackGame['turnsOver']);
+let updateScore = function(card, activePlayer){
+    if(card === 'A'){
+        if(activePlayer['score'] + blackjackGame['cardsMap'][card][1] <= 21){
+            activePlayer['score'] += blackjackGame['cardsMap'][card][1];
+        } else {
+            activePlayer['score'] += blackjackGame['cardsMap'][card][0];
+        }
+    } else {
+        activePlayer['score'] += blackjackGame['cardsMap'][card];
     }
 }
-
-let blackjackHit = function() {
-    if(blackjackGame['isStand'] === false){
-        let card = randomCard();
-        // console.log(card);
-        showCard(card, YOU);
-        updateScore(card, YOU);
-        showScore(YOU);
-        // console.log(YOU['score']);
-    }
-}
-
 
 let showCard = function(card, activePlayer) {
     if(activePlayer['score'] <= 21){
@@ -207,12 +213,40 @@ let showCard = function(card, activePlayer) {
     }
 }
 
+let showScore = function(activePlayer){
+    if(activePlayer['score'] > 21){
+        document.querySelector(activePlayer['scoreSpan']).textContent = 'BUST!!!';
+        document.querySelector(activePlayer['scoreSpan']).style.color = 'red'
+    } else {
+        document.querySelector(activePlayer['scoreSpan']).textContent = activePlayer['score'];
+    }
+}
+
+let sleep = function(ms){
+    return new Promise(resolve => setTimeout(resolve,ms));
+}
+
+let dealerLogic = async function(){
+    blackjackGame['isStand'] = true;
+
+    while(DEALER['score'] < 16 && blackjackGame['isStand'] === true ){
+        let card = randomCard();
+        showCard(card, DEALER);
+        updateScore(card, DEALER);
+        showScore(DEALER);
+
+        await sleep(1000)
+    }
+
+    blackjackGame['turnsOver'] = true;
+    showResult(computeWinner());
+}
+
 let blackjackDeal = function() {
     if(blackjackGame['turnsOver'] === true){
 
         blackjackGame['isStand'] = false;
-
-        showResult(computeWinner());
+      
         let yourImages = document.querySelector('#your-box').querySelectorAll('img');
         let dealerImages = document.querySelector('#dealer-box').querySelectorAll('img');
 
@@ -234,56 +268,8 @@ let blackjackDeal = function() {
         document.querySelector('#blackjack-result').textContent = "Let's Play";
         document.querySelector('#blackjack-result').style.color = "black";
 
-        blackjackGame['turnsOver'] = true;
+        blackjackGame['turnsOver'] = false;
     }
-}
-
-let updateScore = function(card, activePlayer){
-    if(card === 'A'){
-        if(activePlayer['score'] + blackjackGame['cardsMap'][card][1] <= 21){
-            activePlayer['score'] += blackjackGame['cardsMap'][card][1];
-        } else {
-            activePlayer['score'] += blackjackGame['cardsMap'][card][0];
-        }
-    }else {
-        activePlayer['score'] += blackjackGame['cardsMap'][card];
-    }
-}
-
-let showScore = function(activePlayer){
-    if(activePlayer['score'] > 21){
-        document.querySelector(activePlayer['scoreSpan']).textContent = 'BUST!!!';
-        document.querySelector(activePlayer['scoreSpan']).style.color = 'red'
-    } else {
-        document.querySelector(activePlayer['scoreSpan']).textContent = activePlayer['score'];
-    }
-}
-
-let computeWinner = function(){
-    let winner;
-
-    if(YOU['score'] <= 21){
-        if(YOU['score'] > DEALER['score'] || DEALER['score'] > 21){
-            blackjackGame['wins']++;
-            winner = YOU;
-        } else if(YOU['score'] < DEALER['score']){
-            blackjackGame['losses']++;
-            winner = DEALER;
-        } else if(YOU['score'] === DEALER['score']){
-            blackjackGame['draws']++;
-        }
-    } else if(YOU['score'] > 21 && DEALER['score'] <= 21){
-        blackjackGame['losses']++;
-        winner = DEALER;
-    } else if(YOU['score'] > 21 && DEALER['score'] > 21){
-        blackjackGame['draws']++;
-    }
-    // console.log('winner is', winner);
-    console.log(blackjackGame);
-    // console.log(blackjackGame['wins']);
-    // console.log(blackjackGame['losses']);
-    // console.log(blackjackGame['draws']);
-    return winner;
 }
 
 let showResult = function(winner){
@@ -310,6 +296,30 @@ let showResult = function(winner){
         document.querySelector('#blackjack-result').style.color = messageColor;
     }
 }
+
+let computeWinner = function(){
+    let winner;
+
+    if(YOU['score'] <= 21){
+        if(YOU['score'] > DEALER['score'] || DEALER['score'] > 21){
+            blackjackGame['wins']++;
+            winner = YOU;
+        } else if(YOU['score'] < DEALER['score']){
+            blackjackGame['losses']++;
+            winner = DEALER;
+        } else if(YOU['score'] === DEALER['score']){
+            blackjackGame['draws']++;
+        }
+    } else if(YOU['score'] > 21 && DEALER['score'] <= 21){
+        blackjackGame['losses']++;
+        winner = DEALER;
+    } else if(YOU['score'] > 21 && DEALER['score'] > 21){
+        blackjackGame['draws']++;
+    }
+
+    return winner;
+}
+
 
 document.querySelector('#blackjack-hit-button').addEventListener('click', blackjackHit);
 document.querySelector('#blackjack-stand-button').addEventListener('click', dealerLogic);
